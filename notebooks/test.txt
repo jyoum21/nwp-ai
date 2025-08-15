@@ -1,0 +1,14 @@
+1, 2, True
+2, 6, True
+5, 11, False
+3, 13, True
+2, 2, False
+16, 402, True
+13, 155, False
+10, 99, False
+20, 393, False
+19, 344, False
+18, 333, True
+5, 39, True
+8, 33, False
+9, 85, True
