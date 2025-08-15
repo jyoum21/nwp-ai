@@ -1,0 +1,15 @@
+# large datasets
+data/
+
+# pycache
+__pycache__/
+*.pyc
+
+# env files
+.env
+.venv
+
+# ide files
+.vscode/
+.idea/
+.DS_Store
