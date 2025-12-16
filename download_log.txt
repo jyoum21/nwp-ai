@@ -5082,3 +5082,99 @@ Database statistics:
 [2025-11-18 18:05:29]   Total samples: 89
 [2025-11-18 18:05:29]   Image shape: [301 301]
 [2025-11-18 18:05:29]   Database size: 0.01 GB
+[2025-12-15 21:36:07] Starting data collection for years 1983-1983
+[2025-12-15 21:36:07] 
+=== Processing Year 1983 ===
+[2025-12-15 21:36:07] Scraping directory: https://www.ncei.noaa.gov/data/hurricane-satellite-hursat-b1/archive/v06/1983/
+[2025-12-15 21:36:08] Found 1 matching files for year 1983
+[2025-12-15 21:36:08] Found 1 storms for year 1983
+[2025-12-15 21:36:08] Downloading: ALICIA (1983)
+[2025-12-15 21:36:12]   ALICIA (1983): 86 images extracted
+[2025-12-15 21:37:48]   ALICIA (1983): 86 images
+[2025-12-15 21:37:48] Year 1983 complete: 86 images added
+[2025-12-15 21:37:48] 
+==================================================
+[2025-12-15 21:37:48] Data collection complete!
+[2025-12-15 21:37:48] Total storms processed: 1
+[2025-12-15 21:37:48] Total images collected: 86
+[2025-12-15 21:37:48] Failed downloads: 0
+[2025-12-15 21:37:48] 
+Database statistics:
+[2025-12-15 21:37:48]   Total samples: 89
+[2025-12-15 21:37:48]   Image shape: [301 301]
+[2025-12-15 21:37:48]   Database size: 0.01 GB
+[2025-12-15 22:38:39] Starting data collection for years 1983-1983
+[2025-12-15 22:38:39] 
+=== Processing Year 1983 ===
+[2025-12-15 22:38:39] Scraping directory: https://www.ncei.noaa.gov/data/hurricane-satellite-hursat-b1/archive/v06/1983/
+[2025-12-15 22:38:40] Found 1 matching files for year 1983
+[2025-12-15 22:38:40] Found 1 storms for year 1983
+[2025-12-15 22:38:40] Downloading: ALICIA (1983)
+[2025-12-15 22:38:45]   ALICIA (1983): 86 images extracted
+[2025-12-15 22:39:37]   ALICIA (1983): 86 images
+[2025-12-15 22:39:38] Year 1983 complete: 86 images added
+[2025-12-15 22:39:38] 
+==================================================
+[2025-12-15 22:39:38] Data collection complete!
+[2025-12-15 22:39:38] Total storms processed: 1
+[2025-12-15 22:39:38] Total images collected: 86
+[2025-12-15 22:39:38] Failed downloads: 0
+[2025-12-15 22:39:38] 
+Database statistics:
+[2025-12-15 22:39:38]   Total samples: 89
+[2025-12-15 22:39:38]   Image shape: [301 301]
+[2025-12-15 22:39:38]   Database size: 0.01 GB
+[2025-12-15 22:39:52] Successfully deleted hurricane_data.h5
+[2025-12-15 22:40:00] Creating database at hurricane_data.h5
+[2025-12-15 22:40:00] Database created successfully
+[2025-12-15 22:40:00] Starting data collection for years 1983-1983
+[2025-12-15 22:40:00] 
+=== Processing Year 1983 ===
+[2025-12-15 22:40:00] Scraping directory: https://www.ncei.noaa.gov/data/hurricane-satellite-hursat-b1/archive/v06/1983/
+[2025-12-15 22:40:01] Found 1 matching files for year 1983
+[2025-12-15 22:40:01] Found 1 storms for year 1983
+[2025-12-15 22:40:01] Downloading: ALICIA (1983)
+[2025-12-15 22:40:07]   ALICIA (1983): 86 images extracted
+[2025-12-15 22:40:46]   ALICIA (1983): 86 images
+[2025-12-15 22:40:46] Year 1983 complete: 86 images added
+[2025-12-15 22:40:46] 
+==================================================
+[2025-12-15 22:40:46] Data collection complete!
+[2025-12-15 22:40:46] Total storms processed: 1
+[2025-12-15 22:40:46] Total images collected: 86
+[2025-12-15 22:40:46] Failed downloads: 0
+[2025-12-15 22:40:46] 
+Database statistics:
+[2025-12-15 22:40:46]   Total samples: 86
+[2025-12-15 22:40:46]   Image shape: [301 301]
+[2025-12-15 22:40:46]   Database size: 0.01 GB
+[2025-12-16 00:04:54] Successfully deleted hurricane_data.h5
+[2025-12-16 00:05:00] Creating database at hurricane_data.h5
+[2025-12-16 00:05:00] Database created successfully
+[2025-12-16 00:05:00] Starting data collection for years 1983-1983
+[2025-12-16 00:05:00] 
+=== Processing Year 1983 ===
+[2025-12-16 00:05:00] Scraping directory: https://www.ncei.noaa.gov/data/hurricane-satellite-hursat-b1/archive/v06/1983/
+[2025-12-16 00:05:01] Found 1 matching files for year 1983
+[2025-12-16 00:05:01] Found 1 storms for year 1983
+[2025-12-16 00:05:01] Downloading: ALICIA (1983)
+[2025-12-16 00:05:12]   ALICIA (1983): 86 images extracted
+[2025-12-16 00:06:27]   ALICIA (1983): 86 images
+[2025-12-16 00:06:27] Year 1983 complete: 86 images added
+[2025-12-16 00:06:27] 
+==================================================
+[2025-12-16 00:06:27] Data collection complete!
+[2025-12-16 00:06:27] Total storms processed: 1
+[2025-12-16 00:06:27] Total images collected: 86
+[2025-12-16 00:06:27] Failed downloads: 0
+[2025-12-16 00:06:27] 
+Database statistics:
+[2025-12-16 00:06:27]   Total samples: 86
+[2025-12-16 00:06:27]   Image shape: [301 301]
+[2025-12-16 00:06:27]   Database size: 0.01 GB
+[2025-12-16 00:12:37] Processing 1983...
+[2025-12-16 00:12:48] Processing 1983...
+[2025-12-16 00:14:04] Saved 86 images for ALICIA
+[2025-12-16 00:25:01] Overwriting existing database at hurricane_data.h5
+[2025-12-16 00:25:01] Processing 1983...
+[2025-12-16 00:25:22] Saved 86 images for ALICIA

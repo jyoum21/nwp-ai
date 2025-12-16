@@ -1,113 +1,65 @@
-import torch
-import math
-import os
-import xarray as xr
+import h5py
 import numpy as np
-import matplotlib.pyplot as plt
-import urllib.request
-import tarfile
-from netCDF4 import Dataset
-from pathlib import Path
-from scipy.io import netcdf
-import requests
-import io
 
-url1 = 'https://www.ncei.noaa.gov/data/hurricane-satellite-hursat-b1/archive/v06/1978/HURSAT_b1_v06_1978151N15260_ALETTA_c20170721.tar.gz'
-url2 = 'https://www.ncei.noaa.gov/data/hurricane-satellite-hursat-b1/archive/v06/2005/HURSAT_b1_v06_2005261N21290_RITA_c20170721.tar.gz'
+filename = 'hurricane_data.h5'
 
-"""  OLD METHOD  """
-# filePath = 'data/raw/aletta.tar.gz'
-# urllib.request.urlretrieve(url1, filePath)
+def _decode_string(value):
+    """Helper function to decode h5py string values"""
+    if isinstance(value, bytes):
+        return value.decode('utf-8')
+    elif isinstance(value, np.bytes_):
+        return value.decode('utf-8')
+    return str(value)
 
-# print('done')
-
-# f = tarfile.open('data/raw/aletta.tar.gz')
-# # f.extractall('./data/extracted/1978/')
-# f.close()
-
-
-# dir = Path.cwd()
-# nc_path = 'data/extracted/1978/1978151N15260.ALETTA.1978.05.30.1500.34.GOE-2.033.hursat-b1.v06.nc'
-# nc_dataset = Dataset(dir / nc_path)
-
-# # for i in nc_dataset.variables.keys():
-# #     print(i, nc_dataset.variables[i].shape)
-# lats = nc_dataset.variables['lat']
-# lons = nc_dataset.variables['lon']
-# bt = nc_dataset.variables['IRWIN'][0]
-
-# print(lats[:10])
-# print(lons[:10])
-# print(len(lats))
-# print(len(lons))
-# print(bt[:10])
-
-
-# lons = [5, 6, 7]
-# lats = [2, 3, 5]
-# bt = [[4, 6, 7], [2, 9, 10], [1, 8, 11]]
-
-
-
-"""  NEW METHOD  """
-year = (url1.split('/')[-2], url1.split('/')[-1].split('_')[4])[0]
-name = (url1.split('/')[-2], url1.split('/')[-1].split('_')[4])[1]
-
-response = requests.get(url1)
-response.raise_for_status()
-
-file_in_memory = io.BytesIO(response.content)
-with tarfile.open(fileobj=file_in_memory, mode='r:gz') as tar:
-    nc_file = None
-    for member in tar.getmembers():
-        if member.name.endswith('.nc'):
-            nc_file = member
-            break
+with h5py.File(filename, 'r') as f:
+    print("=" * 60)
+    print("HDF5 File Structure")
+    print("=" * 60)
+    print(f"Top-level groups: {list(f.keys())}")
+    print()
     
-    if nc_file:
-        nc_file_buffer = tar.extractfile(nc_file)
-        nc_file_bytes = nc_file_buffer.read()
-
-        with Dataset('in_memory.nc', mode='r', memory=nc_file_bytes) as ds:
-            print("opened dataset")
-
-
-            for i in ds.variables.keys():
-                print(i, ds.variables[i][:])
-            lats = ds.variables['lat'][:]
-            lons = ds.variables['lon'][:]
-            bt = ds.variables['IRWIN'][0][:]
-            print("SHAPE:::", bt.shape)
-
-            plt.pcolormesh(lons, lats, bt, cmap='ocean')
-            plt.colorbar()
-            plt.title(name + ' ' + year + ' at time ' + str(ds.variables['NomDate'][0]) + ' ' + str(ds.variables['NomTime'][0]) + ' ' + str(ds.variables['WindSpd'][0]) + 'kts' )
-            plt.show()
-
-
-
-
-
-""" DISPLAY """
-# plt.pcolormesh(lons, lats, bt, cmap='ocean')
-# plt.colorbar()
-# plt.show()
-
-
-
-
-
-
-
-# tar_gz_path = 'data\HURSAT_b1_v06_2015270N27291_JOAQUIN_c20170721.tar.gz'
-# extract_path = '\data\HURSAT_2015_JOAQUIN'
-
-# os.makedirs(extract_path, exist_ok=True)
-
-# with tarfile.open(tar_gz_path, "r:gz") as tar:
-#     print('CONNECT')
-#     tar.extractall(path=extract_path)
-
-# print('done')
-
-# ds = xr.open_dataset(file_path)
+    # Print global attributes
+    print("Global Attributes:")
+    for key in f.attrs.keys():
+        print(f"  {key}: {f.attrs[key]}")
+    print()
+    
+    # Access images group
+    if 'images' in f:
+        print("Images Group:")
+        print(f"  Datasets: {list(f['images'].keys())}")
+        images_data = f['images/data']
+        print(f"  Images shape: {images_data.shape}")
+        print(f"  Images dtype: {images_data.dtype}")
+        if images_data.shape[0] > 0:
+            print(f"  First image shape: {images_data[0].shape}")
+            print(f"  First image min: {np.min(images_data[0])}")
+            print(f"  First image max: {np.max(images_data[0])}")
+            print(f"  First image mean: {np.mean(images_data[0]):.2f}")
+        print()
+    
+    # Access metadata group
+    if 'metadata' in f:
+        print("Metadata Group:")
+        print(f"  Datasets: {list(f['metadata'].keys())}")
+        
+        # Print metadata for first few samples
+        num_samples = f.attrs.get('total_samples', 0)
+        if num_samples > 0:
+            print(f"\n  First 5 samples:")
+            for i in range(min(5, num_samples)):
+                print(f"    Sample {i}:")
+                print(f"      Year: {f['metadata/years'][i]}")
+                storm_name = _decode_string(f['metadata/storm_names'][i])
+                print(f"      Storm: {storm_name}")
+                print(f"      Date: {f['metadata/dates'][i]}")
+                print(f"      Time: {f['metadata/times'][i]}")
+                print(f"      Wind Speed: {f['metadata/wind_speeds'][i]}")
+                print(f"      Latitude: {f['metadata/latitudes'][i]}")
+                print(f"      Longitude: {f['metadata/longitudes'][i]}")
+                print(f"      Pressure: {f['metadata/pressures'][i]}")
+        print()
+    
+    print("=" * 60)
+    print(f"Total samples in database: {f.attrs.get('total_samples', 0)}")
+    print("=" * 60)
