@@ -11,9 +11,9 @@ def _decode_string(value):
         return value.decode('utf-8')
     return str(value)
 
-def animate_first_storm(db_path='hurricane_data.h5', dt=0.2):
+def animate_first_storm(db_path='data/hurricane_data.h5', dt=0.2):
     """
-    Animate all timesteps from the first storm in hurricane_data.h5.
+    Animate all timesteps from the first storm in data/hurricane_data.h5.
     
     Args:
         db_path: Path to the HDF5 database file
