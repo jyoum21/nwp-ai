@@ -1,7 +1,7 @@
 import h5py
 import numpy as np
 
-filename = 'hurricane_data.h5'
+filename = 'data/hurricane_data.h5'
 
 def _decode_string(value):
     """Helper function to decode h5py string values"""
