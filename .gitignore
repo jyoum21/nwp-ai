@@ -1,5 +1,7 @@
 # large datasets
 data/hurricane_data.h5
+*.csv
+*.txt
 
 # pycache
 __pycache__/
