@@ -1,5 +1,5 @@
 # large datasets
-data/
+data/hurricane_data.h5
 
 # pycache
 __pycache__/
@@ -13,3 +13,8 @@ __pycache__/
 .vscode/
 .idea/
 .DS_Store
+
+# pth files
+*.pth
+*.pt
+*.ckpt
