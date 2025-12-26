@@ -3,16 +3,16 @@ Inference script for hurricane wind speed prediction.
 
 Usage:
     # Predict from H5 file (shows first N samples)
-    python predict.py --model outputs/best_model.pth --data data/hurricane_data.h5
+    python src/predict.py --model outputs/best_model.pth --data data/hurricane_data.h5
     
     # Predict on a specific index in the H5 file
-    python predict.py --model outputs/best_model.pth --data data/hurricane_data.h5 --index 5
+    python src/predict.py --model outputs/best_model.pth --data data/hurricane_data.h5 --index 5
     
     # Predict from a numpy file
-    python predict.py --model outputs/best_model.pth --image path/to/image.npy
+    python src/predict.py --model outputs/best_model.pth --image path/to/image.npy
     
     # Predict from a regular image file (PNG, JPG, etc.)
-    python predict.py --model outputs/best_model.pth --image path/to/hurricane.png
+    python src/predict.py --model outputs/best_model.pth --image path/to/hurricane.png
 """
 
 import argparse
@@ -22,6 +22,10 @@ import h5py
 import matplotlib.pyplot as plt
 from PIL import Image
 import os
+import sys
+
+# Add parent directory to path to allow imports from root
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.model import HurricaneWindCNN
 
@@ -132,7 +136,7 @@ def predict_single(model, image, device):
     return output.item()
 
 
-def predict_from_h5(model, h5_path, device, indices=None, show_plot=True):
+def predict_from_h5(model, h5_path, device, indices=None, show_plot=True, output_dir='outputs'):
     """
     Predict on samples from an H5 file.
     
@@ -142,6 +146,7 @@ def predict_from_h5(model, h5_path, device, indices=None, show_plot=True):
         device: torch device
         indices: List of indices to predict (None = first 10)
         show_plot: Whether to display visualization
+        output_dir: Directory to save visualization
     """
     with h5py.File(h5_path, 'r') as f:
         total = f.attrs['total_samples']
@@ -210,8 +215,10 @@ def predict_from_h5(model, h5_path, device, indices=None, show_plot=True):
                     axes[1, i].axis('off')
             
             plt.tight_layout()
-            plt.savefig('predictions_visualization.png', dpi=150)
-            print("\nVisualization saved to predictions_visualization.png")
+            os.makedirs(output_dir, exist_ok=True)
+            output_path = os.path.join(output_dir, 'predictions_visualization.png')
+            plt.savefig(output_path, dpi=150)
+            print(f"\nVisualization saved to {output_path}")
             plt.show()
 
 
@@ -290,6 +297,7 @@ def main():
     parser.add_argument('--index', type=int, default=None, help='Specific index in H5 file')
     parser.add_argument('--n', type=int, default=10, help='Number of samples to predict')
     parser.add_argument('--no-plot', action='store_true', help='Disable plotting')
+    parser.add_argument('--output-dir', type=str, default='outputs', help='Directory to save outputs')
     args = parser.parse_args()
     
     # Setup device
@@ -313,10 +321,11 @@ def main():
             indices = [args.index]
         else:
             indices = list(range(args.n))
-        predict_from_h5(model, args.data, device, indices, show_plot=not args.no_plot)
+        predict_from_h5(model, args.data, device, indices, show_plot=not args.no_plot, output_dir=args.output_dir)
     else:
         print("Error: Provide either --data or --image")
 
 
 if __name__ == '__main__':
     main()
+

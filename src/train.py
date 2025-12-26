@@ -2,7 +2,7 @@
 Training script for hurricane wind speed estimation.
 
 Usage:
-    python train.py --data data/hurricane_data.h5 --epochs 50
+    python src/train.py --data data/hurricane_data.h5 --epochs 50
 """
 
 import argparse
@@ -13,6 +13,11 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, random_split
 import matplotlib.pyplot as plt
 from torchvision import transforms
+
+import sys
+import os
+# Add parent directory to path to allow imports from root
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from data.process import HurricaneH5Dataset
 from src.model import build_model
@@ -191,3 +196,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
