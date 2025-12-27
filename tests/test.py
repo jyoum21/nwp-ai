@@ -63,3 +63,4 @@ with h5py.File(filename, 'r') as f:
     print("=" * 60)
     print(f"Total samples in database: {f.attrs.get('total_samples', 0)}")
     print("=" * 60)
+

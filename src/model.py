@@ -4,10 +4,13 @@ ResNet-50 model for hurricane wind speed estimation.
 Handles single-channel (infrared) satellite imagery input.
 """
 
+import os
 import torch
 import torch.nn as nn
+from torch.utils.data import DataLoader
 from torchvision import models
 from torchvision.models import ResNet50_Weights
+from data.process import HurricaneH5Dataset
 
 
 class HurricaneWindCNN(nn.Module):
@@ -180,15 +183,35 @@ def build_model(
 
 
 if __name__ == '__main__':
-    # Quick test
+    # Quick test with real data
     model = build_model(pretrained=True, freeze_backbone=False)
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
     
-    # Test forward pass with dummy data matching your dataset output
-    dummy_input = torch.randn(4, 1, 301, 301)  # Batch of 4 images
-    if torch.cuda.is_available():
-        dummy_input = dummy_input.cuda()
+    # Load real data from dataset
+    data_path = 'data/hurricane_data.h5'
+    dataset = HurricaneH5Dataset(data_path)
+    dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
     
-    output = model(dummy_input)
-    print(f"\nInput shape: {dummy_input.shape}")
-    print(f"Output shape: {output.shape}")
-    print(f"Sample predictions: {output.squeeze().tolist()}")
+    # Get a batch of real data
+    images, labels = next(iter(dataloader))
+    images = images.to(device)
+    labels = labels.to(device)
+    
+    # Forward pass
+    model.eval()
+    with torch.no_grad():
+        predictions = model(images)
+    
+    print(f"\nLoaded {len(dataset)} samples from {data_path}")
+    print(f"Input shape: {images.shape}")
+    print(f"Output shape: {predictions.shape}")
+    print(f"\nBatch predictions vs actual wind speeds:")
+    print("-" * 50)
+    for i in range(len(predictions)):
+        pred = predictions[i].item()
+        actual = labels[i].item()
+        error = abs(pred - actual)
+        print(f"  Sample {i+1}: Predicted {pred:.1f} kt | Actual {actual:.1f} kt | Error {error:.1f} kt")
+    
+    # Clean up
+    dataset.close()

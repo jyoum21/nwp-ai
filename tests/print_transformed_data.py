@@ -1,4 +1,4 @@
-from process import HurricaneH5Dataset
+from data.process import HurricaneH5Dataset
 import torch
 
 # 1. Initialize the dataset
@@ -15,3 +15,4 @@ print(f"Shape: {image_tensor.shape}") # Should be [1, 301, 301]
 # 3. Check the values
 print(f"Max Value: {image_tensor.max().item():.4f}") # Should be <= 1.0
 print(f"Min Value: {image_tensor.min().item():.4f}") # Should be >= 0.0
+
