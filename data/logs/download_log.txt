@@ -1,0 +1,6 @@
+[2025-12-25 23:53:40] Overwriting existing database at data/hurricane_data.h5
+[2025-12-25 23:53:40] Processing 1983...
+[2025-12-25 23:53:49] Saved 86 images for ALICIA
+[2025-12-25 23:53:57] Saved 81 images for BARRY
+[2025-12-25 23:54:03] Saved 63 images for CHANTAL
+[2025-12-25 23:54:09] Saved 62 images for DEAN

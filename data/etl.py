@@ -20,8 +20,7 @@ STORMS_BY_YEAR = {
     1980: ['ALLEN', 'BONNIE', 'CHARLEY', 'DANIELLE', 'EARL', 'FRANCES', 'GEORGES', 'HERMINE', 'IVAN', 'JEANNE', 'KARL'],
     1981: ['ARLENE', 'BRET', 'CINDY', 'DENNIS', 'EMILY', 'FLOYD', 'GERT', 'HARVEY', 'IRENE', 'JOSE', 'KATRINA', 'MARIA'],
     1982: ['ALBERTO', 'BERYL', 'CHRIS', 'DEBBY', 'ERNESTO'],
-    1983: ['ALICIA'],
-    # 1983: ['ALICIA', 'BARRY', 'CHANTAL', 'DEAN'],
+    1983: ['ALICIA', 'BARRY', 'CHANTAL', 'DEAN'],
     1984: ['ARTHUR', 'BERTHA', 'CESAR', 'DIANA', 'EDOUARD', 'FRAN', 'GUSTAV', 'HORTENSE', 'ISIDORE', 'JOSEPHINE', 'KLAUS', 'LILI', 'MARCO'],
     1985: ['ANA', 'BOB', 'CLAUDETTE', 'DANNY', 'ELENA', 'FABIAN', 'GLORIA', 'HENRI', 'ISABEL', 'JUAN', 'KATE'],
     1986: ['ANDREW', 'BONNIE', 'CHARLEY', 'DANIELLE', 'EARL', 'FRANCES'],
@@ -59,7 +58,7 @@ STORMS_BY_YEAR = {
 # config
 BASE_URL = 'https://www.ncei.noaa.gov/data/hurricane-satellite-hursat-b1/archive/v06'
 DB_PATH = 'data/hurricane_data.h5'
-LOG_FILE = 'download_log.txt'
+LOG_FILE = 'data/logs/download_log.txt'
 
 # HurricaneDataBuilder: scrapes NOAA data and builds database
 class HurricaneDataBuilder:
@@ -69,7 +68,7 @@ class HurricaneDataBuilder:
         self.db_path = db_path
         self.base_url = base_url
         self.image_shape = image_shape
-        self.log_file = 'download_log.txt'
+        self.log_file = 'data/logs/download_log.txt'
 
     # log messages
     def log(self, message, print_msg=True):
