@@ -37,7 +37,7 @@ MAX_TEMP = 340.0
 
 def load_model(checkpoint_path, device):
     """Load trained model from checkpoint."""
-    model = HurricaneWindCNN(pretrained=False)
+    model = HurricaneWindCNN()
     
     # weights_only=False needed for PyTorch 2.6+ when checkpoint contains numpy arrays
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)

@@ -113,7 +113,7 @@ def main():
     
     # Build model
     print("\nBuilding model...")
-    model = build_model(pretrained=True, dropout_rate=0.5, device=str(device))
+    model = build_model(dropout_rate=0.5, device=str(device))
     
     # Loss and optimizer
     criterion = nn.MSELoss()
