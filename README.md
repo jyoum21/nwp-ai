@@ -1,6 +1,6 @@
 # nwp-ai
 
-## **WIP**
+this is a **WIP**
 
 ## End goal:
 Input a satellite image of a tropical system, and nwp-ai will return an estimated wind speed and pressure, as well as (de)intensification predictions.
